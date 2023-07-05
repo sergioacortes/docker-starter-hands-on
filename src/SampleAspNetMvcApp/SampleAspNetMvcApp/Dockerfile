@@ -28,6 +28,9 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://+:$HttpPort
 
 WORKDIR /app
+RUN addgroup --gid 1000 a3software && adduser -G a3software -D -s /bin/false -u 1000 a3innuva
+RUN chown -R a3innuva:a3software /app
+
 COPY --from=publish /app/publish .
 EXPOSE $HttpPort
 
