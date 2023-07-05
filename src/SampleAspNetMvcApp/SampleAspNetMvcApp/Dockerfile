@@ -21,7 +21,7 @@ COPY . .
 RUN dotnet build "SampleAspNetMvcApp.csproj" --no-restore -c ${BuildConfiguration}
 
 FROM build AS publish
-RUN dotnet publish "SampleAspNetMvcApp.csproj" -c ${BuildConfiguration} -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "SampleAspNetMvcApp.csproj" --no-build -c ${BuildConfiguration} -o /app/publish
 
 FROM base AS final
 WORKDIR /app
