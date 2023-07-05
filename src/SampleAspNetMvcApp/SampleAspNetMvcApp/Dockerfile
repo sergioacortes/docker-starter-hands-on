@@ -5,8 +5,6 @@ ARG SdkVersion=6.0-alpine
 
 FROM mcr.microsoft.com/dotnet/aspnet:${AspnetVersion} AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:${SdkVersion} AS build
 
@@ -24,6 +22,13 @@ FROM build AS publish
 RUN dotnet publish "SampleAspNetMvcApp.csproj" --no-build -c ${BuildConfiguration} -o /app/publish
 
 FROM base AS final
+
+ARG HttpPort=8080
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:$HttpPort
+
 WORKDIR /app
 COPY --from=publish /app/publish .
+EXPOSE $HttpPort
+
 ENTRYPOINT ["dotnet", "SampleAspNetMvcApp.dll"]
