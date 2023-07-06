@@ -23,7 +23,7 @@ RUN dotnet publish "SampleAspNetMvcApp.csproj" --no-build -c ${BuildConfiguratio
 
 FROM base AS final
 
-ARG HttpPort=8080
+ARG HttpPort=80
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://+:$HttpPort
 
