@@ -26,7 +26,7 @@ RUN apk add --update git cmake make musl-dev gcc gettext-dev libintl
 RUN cd /tmp && git clone https://gitlab.com/rilian-la-te/musl-locales.git
 RUN cd /tmp/musl-locales && cmake . && make && make install
 
-# Remove curl and git packages 
+# Remove curl and git packages because vulnerabilities
 RUN apk del curl git
 
 # Create group and user
