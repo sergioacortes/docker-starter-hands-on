@@ -22,5 +22,7 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 node_modules/
+dist/
+package-lock.json
 LICENSE
 README.md
